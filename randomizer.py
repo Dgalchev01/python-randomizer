@@ -1,32 +1,32 @@
-import sys
-import random
+import sys  # Импортира модула sys, който позволява достъп до аргументите подадени от командния ред
+import random  # Импортира модула random, който се използва за генериране на случайни стойности
 
 
-def get_random_line(filename):
-    try:
-        with open(filename, "r", encoding="utf-8") as file:
-            lines = [line.strip() for line in file if line.strip()]
+def get_random_line(filename):  # Дефинира функция, която приема име на файл и извежда случаен ред от него
+    try:  # Опитва се да изпълни кода вътре и ако възникне грешка, тя ще бъде прихваната
+        with open(filename, "r", encoding="utf-8") as file:  # Отваря подадения файл за четене с UTF-8 кодировка
+            lines = [line.strip() for line in file if line.strip()]  # Чете редовете от файла, премахва празните редове и излишните интервали
 
-        if not lines:
-            print("The file is empty.")
-            return
+        if not lines:  # Проверява дали списъкът с редове е празен
+            print("The file is empty.")  # Ако файлът няма съдържание, извежда съобщение
+            return  # Прекратява изпълнението на функцията
 
-        print(random.choice(lines))
+        print(random.choice(lines))  # Избира и отпечатва произволен ред от списъка с редове
 
-    except FileNotFoundError:
-        print(f"File '{filename}' not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-
-def main():
-    if len(sys.argv) < 2:
-        filename = "names.txt"
-    else:
-        filename = sys.argv[1]
-
-    get_random_line(filename)
+    except FileNotFoundError:  # Улавя грешка ако файлът не съществува
+        print(f"File '{filename}' not found.")  # Извежда съобщение, че файлът не е намерен
+    except Exception as e:  # Улавя всички други възможни грешки
+        print(f"An error occurred: {e}")  # Извежда съобщение за възникнала грешка
 
 
-if __name__ == "__main__":
-    main()
+def main():  # Главна функция на програмата, която управлява логиката на изпълнение
+    if len(sys.argv) < 2:  # Проверява дали е подаден аргумент от командния ред
+        filename = "names.txt"  # Ако няма подаден аргумент, използва файл по подразбиране
+    else:  # Ако има подаден аргумент
+        filename = sys.argv[1]  # Взима първия аргумент от командния ред като име на файл
+
+    get_random_line(filename)  # Извиква функцията, която ще избере случаен ред от файла
+
+
+if __name__ == "__main__":  # Проверява дали скриптът се стартира директно, а не се импортва като модул
+    main()  # Извиква главната функция на програмата
